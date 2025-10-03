@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">ClinicaSX</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <!-- Menú -->
+    <string name="menu_home">Home</string>
+    <string name="menu_crea">Crear</string>
+    <string name="menu_edita">Editar</string>
+    <string name="menu_elimina">Eliminar</string>
+    <string name="menu_lista">Listar</string>
+    <string name="menu_acercade">Acerca de</string>
+
+    <string name="universidad">Centro Universitario UAEMex Tianguistenco</string>
+    <string name="especialidad">Ingeniería en Software</string>
+    <string name="materia">Programación Aplicada a Sistemas de Computo Movil</string>
+    <string name="alumno">Alfonso Angel García Hernández</string>
+    <string name="profesora">R Elizabeth Pulido</string>
+    <string name="version">Version 1.0.2025B</string>
+
+    <string name="infoPaciente">Información Paciente</string>
+    <string name="identificador">ID</string>
+    <string name="nombrePaciente">Nombre</string>
+    <string name="fechaIngreso">Fecha de Ingreso</string>
+    <string name="edadPaciente">Edad</string>
+    <string name="generoPaciente">Genero</string>
+    <string name="estatura">Estatura</string>
+    <string name="peso">Peso</string>
+    <string name="area">Área médica</string>
+    <string name="docto">Medico</string>
+    <string name="busca">Buscar</string>
+    <string name="guardar">Guardar</string>
+    <string name="limpia">Limpiar</string>
+    <string name="descripcion">Descripción</string>
+    <!-- Agregar al final de tu res/values/strings.xml -->
+    <string name="tap_para_tomar_foto">Toca para tomar una foto</string>
+    <string name="elegir">Elegir</string>
+
+    <!-- Mensajes (si los quieres en toasts) -->
+    <string name="permiso_camara_denegado">Permiso de cámara denegado</string>
+    <string name="foto_capturada">Foto capturada</string>
+    <string name="error_capturar_foto">Error al capturar foto</string>
+    <string name="error_archivo_foto">Error al crear archivo para la foto</string>
+    <string name="requerido">Requerido</string>
+    <string name="seleccione_area">Seleccione un área</string>
+    <string name="seleccione_doctor">Seleccione un médico</string>
+    <string name="seleccione_genero">Seleccione género</string>
+    <string name="id_invalido">ID inválido</string>
+    <string name="db_no_init">Base de datos no inicializada</string>
+    <string name="paciente_guardado">Paciente guardado</string>
+    <string name="error_guardar">Error al guardar</string>
+    <string name="form_limpio">Formulario limpio</string>
+
+    <string name="imagen_seleccionada">Imagen seleccionada</string>
+    <string name="error_copiar_imagen">No se pudo copiar la imagen</string>
+
+
+</resources>

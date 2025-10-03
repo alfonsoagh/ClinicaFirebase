@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.clinicasx.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_crea"
+        android:name="com.example.clinicasx.ui.crea.CreaFragment"
+        android:label="@string/menu_crea"
+        tools:layout="@layout/fragment_crea" />
+
+    <fragment
+        android:id="@+id/nav_edita"
+        android:name="com.example.clinicasx.ui.edita.EditaFragment"
+        android:label="@string/menu_edita"
+        tools:layout="@layout/fragment_edita" />
+
+    <fragment
+        android:id="@+id/nav_elimina"
+        android:name="com.example.clinicasx.ui.elimina.EliminaFragment"
+        android:label="@string/menu_elimina"
+        tools:layout="@layout/fragment_elimina" />
+
+    <fragment
+        android:id="@+id/nav_lista"
+        android:name="com.example.clinicasx.ui.lista.ListaFragment"
+        android:label="@string/menu_lista"
+        tools:layout="@layout/fragment_lista" />
+
+    <fragment
+        android:id="@+id/nav_acercade"
+        android:name="com.example.clinicasx.ui.acercade.AcercadeFragment"
+        android:label="@string/menu_acercade"
+        tools:layout="@layout/fragment_acercade" />
+
+
+</navigation>

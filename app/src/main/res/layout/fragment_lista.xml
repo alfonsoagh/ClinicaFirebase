@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".ui.lista.ListaFragment">
+
+    <TextView
+        android:id="@+id/text_listar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/menu_lista"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:paddingBottom="8dp"
+        android:gravity="center_horizontal" />
+
+    <!-- Estado vacío -->
+    <TextView
+        android:id="@+id/emptyView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No hay pacientes registrados"
+        android:padding="16dp"
+        android:gravity="center"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/ListLViewPac"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:dividerHeight="8dp"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp"
+        android:listSelector="@android:color/transparent" />
+
+</LinearLayout>
