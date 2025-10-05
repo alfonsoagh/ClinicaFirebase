@@ -57,5 +57,21 @@
     <string name="imagen_seleccionada">Imagen seleccionada</string>
     <string name="error_copiar_imagen">No se pudo copiar la imagen</string>
 
-
+    <!-- Nuevos textos para login, sincronización, exportación y errores de autenticación -->
+    <string name="login">Iniciar sesión</string>
+    <string name="register">Registrarse</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="sync_now">Sincronizar ahora</string>
+    <string name="export_json">Exportar JSON</string>
+    <string name="import_json">Importar JSON</string>
+    <string name="login_failed">No se pudo iniciar sesión</string>
+    <string name="register_failed">No se pudo registrar</string>
+    <string name="sync_started">Sincronización iniciada</string>
+    <string name="sync_finished">Sincronización finalizada</string>
+    <string name="export_done">Exportación completada</string>
+    <string name="export_error">Error al exportar</string>
+    <string name="import_done">Importación completada</string>
+    <string name="import_error">Error al importar</string>
 </resources>

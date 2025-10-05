@@ -1,15 +1,41 @@
-*.iml
-.gradle
+# === Android/Gradle ===
+.gradle/
+**/build/
+**/out/
+.cxx/
+.externalNativeBuild/
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
 local.properties
+
+# Capturas/artefactos temporales
+captures/
+*.log
+
+# === Android Studio / IntelliJ ===
+.idea/
+*.iml
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# === Binarios generados ===
+*.apk
+*.aab
+app/release/**
+
+# === Firmas / Keystores (no subir a git) ===
+*.jks
+*.keystore
+key.properties
+
+# === Firebase / Config locales (recomendado no subir) ===
+# Si decides mantenerlos privados, ignora estos; si tu build remoto los necesita, quita estas líneas.
+app/google-services.json
+**/google-services.json
+app/src/**/google-services.json
+app/src/main/assets/firebase_config.json
+
+# === Otros artefactos comunes ===
+*.orig
+*.rej

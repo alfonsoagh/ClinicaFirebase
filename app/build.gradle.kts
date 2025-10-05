@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -44,6 +45,26 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.legacy.support.v4)
+
+    // Firebase BOM y módulos
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.storage)
+
+    // WorkManager para sincronización en segundo plano
+    implementation(libs.work.runtime)
+
+    // Gson para manejo de JSON (export/import e historiales)
+    implementation(libs.gson)
+
+    // Opcional: tasks (ya transitivo, pero lo fijamos por compatibilidad)
+    implementation(libs.play.services.tasks)
+
+    // Fix robusto para ListenableFuture requerido por WorkManager
+    implementation(libs.guava.android)
+    implementation(libs.glide)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

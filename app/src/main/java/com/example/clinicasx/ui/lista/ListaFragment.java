@@ -1,8 +1,6 @@
 package com.example.clinicasx.ui.lista;
 
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -18,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.example.clinicasx.R;
 import com.example.clinicasx.databinding.FragmentListaBinding;
 import com.example.clinicasx.db.SQLite;
@@ -123,11 +122,15 @@ public class ListaFragment extends Fragment {
         l2.setText(it.sexo + " • " + it.edad + " años • " + it.fecha);
         l3.setText(getString(R.string.estatura) + ": " + it.estatura + " • " + getString(R.string.peso) + ": " + it.peso);
 
-        if (!TextUtils.isEmpty(it.imgPath) && new File(it.imgPath).exists()) {
-            Bitmap bm = decodeSampledBitmapFromFile(it.imgPath, 1000, 1000);
-            img.setImageBitmap(bm != null ? bm : BitmapFactory.decodeResource(getResources(), R.drawable.ic_person));
-        } else {
+        String src = it.imgPath;
+        if (TextUtils.isEmpty(src) || "N/A".equalsIgnoreCase(src)) {
             img.setImageResource(R.drawable.ic_person);
+        } else if (src.startsWith("http")) {
+            Glide.with(this).load(src).placeholder(R.drawable.ic_person).error(R.drawable.ic_person).into(img);
+        } else if (src.startsWith("content://")) {
+            Glide.with(this).load(android.net.Uri.parse(src)).placeholder(R.drawable.ic_person).error(R.drawable.ic_person).into(img);
+        } else {
+            Glide.with(this).load(new File(src)).placeholder(R.drawable.ic_person).error(R.drawable.ic_person).into(img);
         }
 
         new MaterialAlertDialogBuilder(requireContext())
@@ -137,23 +140,6 @@ public class ListaFragment extends Fragment {
     }
 
     private static String s(Cursor c, int i) { return c.isNull(i) ? "" : c.getString(i); }
-
-    private static Bitmap decodeSampledBitmapFromFile(String path, int reqWidth, int reqHeight) {
-        BitmapFactory.Options opt = new BitmapFactory.Options();
-        opt.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(path, opt);
-        opt.inSampleSize = calculateInSampleSize(opt, reqWidth, reqHeight);
-        opt.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(path, opt);
-    }
-    private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        int h = options.outHeight, w = options.outWidth, s = 1;
-        if (h > reqHeight || w > reqWidth) {
-            int halfH = h / 2, halfW = w / 2;
-            while ((halfH / s) >= reqHeight && (halfW / s) >= reqWidth) s *= 2;
-        }
-        return s;
-    }
 
     @Override
     public void onDestroyView() {

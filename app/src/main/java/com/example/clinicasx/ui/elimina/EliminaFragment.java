@@ -1,8 +1,6 @@
 package com.example.clinicasx.ui.elimina;
 
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,8 +15,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.clinicasx.R;
 import com.example.clinicasx.db.SQLite;
+import com.example.clinicasx.sync.SyncManager;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
@@ -131,16 +131,15 @@ public class EliminaFragment extends Fragment {
             tvFecha.setText(getString(R.string.fechaIngreso) + ": " + fecha);
             tvEstatPeso.setText(getString(R.string.estatura) + ": " + est + " • " + getString(R.string.peso) + ": " + peso);
 
-            // Foto
-            if (!TextUtils.isEmpty(imgPath) && new File(imgPath).exists()) {
-                Bitmap bm = decodeSampledBitmapFromFile(imgPath, 480, 480);
-                if (bm != null) {
-                    ivFoto.setImageBitmap(bm);
-                } else {
-                    ivFoto.setImageResource(R.drawable.ic_person);
-                }
-            } else {
+            // Foto con Glide (http/content/file)
+            if (TextUtils.isEmpty(imgPath) || "N/A".equalsIgnoreCase(imgPath)) {
                 ivFoto.setImageResource(R.drawable.ic_person);
+            } else if (imgPath.startsWith("http")) {
+                Glide.with(this).load(imgPath).placeholder(R.drawable.ic_person).error(R.drawable.ic_person).centerCrop().into(ivFoto);
+            } else if (imgPath.startsWith("content://")) {
+                Glide.with(this).load(android.net.Uri.parse(imgPath)).placeholder(R.drawable.ic_person).error(R.drawable.ic_person).centerCrop().into(ivFoto);
+            } else {
+                Glide.with(this).load(new File(imgPath)).placeholder(R.drawable.ic_person).error(R.drawable.ic_person).centerCrop().into(ivFoto);
             }
 
             // Guarda para confirmación
@@ -173,14 +172,12 @@ public class EliminaFragment extends Fragment {
     private void eliminar() {
         if (currentId == null) return;
 
-        // método limpio en SQLite (abajo te pongo cómo añadirlo)
         int rows = sqLite.eliminarPorId(currentId);
 
-        // (Opcional) borrar archivo de foto si existe
-        if (!TextUtils.isEmpty(currentImgPath)) {
+        // (Opcional) borrar archivo de foto si existe (solo si era local)
+        if (!TextUtils.isEmpty(currentImgPath) && !currentImgPath.startsWith("http")) {
             File f = new File(currentImgPath);
             if (f.exists()) {
-                // ignorar resultado; no es crítico
                 //noinspection ResultOfMethodCallIgnored
                 f.delete();
             }
@@ -188,6 +185,8 @@ public class EliminaFragment extends Fragment {
 
         if (rows > 0) {
             Toast.makeText(requireContext(), "Paciente eliminado", Toast.LENGTH_SHORT).show();
+            // Encolar sincronización inmediata tras DELETE
+            SyncManager.enqueueNow(requireContext());
             limpiar();
         } else {
             Toast.makeText(requireContext(), "No se pudo eliminar", Toast.LENGTH_SHORT).show();
@@ -213,25 +212,5 @@ public class EliminaFragment extends Fragment {
 
     private static String safe(Cursor c, int idx) {
         return c.isNull(idx) ? "" : c.getString(idx);
-    }
-
-    private static Bitmap decodeSampledBitmapFromFile(String path, int reqWidth, int reqHeight) {
-        BitmapFactory.Options opt = new BitmapFactory.Options();
-        opt.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(path, opt);
-        opt.inSampleSize = calculateInSampleSize(opt, reqWidth, reqHeight);
-        opt.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(path, opt);
-    }
-
-    private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        int height = options.outHeight, width = options.outWidth, inSampleSize = 1;
-        if (height > reqHeight || width > reqWidth) {
-            int halfH = height / 2, halfW = width / 2;
-            while ((halfH / inSampleSize) >= reqHeight && (halfW / inSampleSize) >= reqWidth) {
-                inSampleSize *= 2;
-            }
-        }
-        return inSampleSize;
     }
 }

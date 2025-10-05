@@ -29,8 +29,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.clinicasx.R;
 import com.example.clinicasx.db.SQLite;
+import com.example.clinicasx.sync.SyncManager;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -238,11 +240,16 @@ public class EditaFragment extends Fragment implements
     }
 
     private void mostrarFoto(String path) {
-        if (!TextUtils.isEmpty(path) && new File(path).exists()) {
-            Bitmap bm = decodeSampledBitmapFromFile(path, 480, 480);
-            ivFoto.setImageBitmap(bm != null ? bm : BitmapFactory.decodeResource(getResources(), R.drawable.ic_person));
-        } else {
+        if (TextUtils.isEmpty(path) || "N/A".equalsIgnoreCase(path)) {
             ivFoto.setImageResource(R.drawable.ic_person);
+            return;
+        }
+        if (path.startsWith("http")) {
+            Glide.with(this).load(path).placeholder(R.drawable.ic_person).error(R.drawable.ic_person).centerCrop().into(ivFoto);
+        } else if (path.startsWith("content://")) {
+            Glide.with(this).load(Uri.parse(path)).placeholder(R.drawable.ic_person).error(R.drawable.ic_person).centerCrop().into(ivFoto);
+        } else {
+            Glide.with(this).load(new File(path)).placeholder(R.drawable.ic_person).error(R.drawable.ic_person).centerCrop().into(ivFoto);
         }
     }
 
@@ -390,6 +397,8 @@ public class EditaFragment extends Fragment implements
         toast(msg);
 
         if (wasUpdateSuccessful(msg)) {
+            // Encolar sync inmediata tras UPDATE
+            SyncManager.enqueueNow(requireContext());
             limpiarCampos();
         }
     }
@@ -444,6 +453,7 @@ public class EditaFragment extends Fragment implements
 
     private void toast(String msg) { Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show(); }
 
+    // ==================== BitmapFactory ====================
     private static Bitmap decodeSampledBitmapFromFile(String path, int reqWidth, int reqHeight) {
         BitmapFactory.Options opt = new BitmapFactory.Options();
         opt.inJustDecodeBounds = true;
