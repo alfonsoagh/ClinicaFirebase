@@ -1,41 +1,70 @@
-# === Android/Gradle ===
+# ========== SO ==========
+.DS_Store
+Thumbs.db
+
+# ========== Android/Gradle ==========
 .gradle/
 **/build/
 **/out/
 .cxx/
 .externalNativeBuild/
-/local.properties
 local.properties
-
-# Capturas/artefactos temporales
 captures/
 *.log
 
-# === Android Studio / IntelliJ ===
+# ========== Android Studio / IntelliJ ==========
 .idea/
 *.iml
 
-# macOS / Windows
-.DS_Store
-Thumbs.db
-
-# === Binarios generados ===
+# ========== Artefactos de build ==========
 *.apk
 *.aab
 app/release/**
+**/output.json
+**/mapping.txt
 
-# === Firmas / Keystores (no subir a git) ===
+# ========== Keystores / firmas ==========
 *.jks
 *.keystore
 key.properties
+**/signing/**
+**/.signing/**
 
-# === Firebase / Config locales (recomendado no subir) ===
-# Si decides mantenerlos privados, ignora estos; si tu build remoto los necesita, quita estas líneas.
+# ========== Firebase / Config locales ==========
+# (mantener privados; si tu CI los necesita, quítalos)
+# Raíz del repo:
+google-services.json
+# Módulo app:
 app/google-services.json
+# Cualquier subcarpeta por si acaso:
 **/google-services.json
-app/src/**/google-services.json
-app/src/main/assets/firebase_config.json
+**/GoogleService-Info.plist
+**/firebase_config.json
 
-# === Otros artefactos comunes ===
+# ========== Reports / tests / lint ==========
+**/test-results/
+**/reports/
+**/lint-results*
+**/lint/tmp/
+**/jacoco/
+
+# ========== Editores / temporales ==========
+.vscode/
+*.tmp
+*.bak
+*~
+*.swp
+*.swo
 *.orig
 *.rej
+
+# ========== Play/Crashlytics / fastlane ==========
+**/crashlytics-build.properties
+**/fabric.properties
+fastlane/
+
+# ========== Gradle Wrapper (NO ignorar) ==========
+!gradlew
+!gradlew.bat
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
