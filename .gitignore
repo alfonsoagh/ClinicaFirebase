@@ -1,13 +1,18 @@
+<<<<<<< HEAD
 # ========== SO ==========
 .DS_Store
 Thumbs.db
 
 # ========== Android/Gradle ==========
+=======
+# === Android/Gradle ===
+>>>>>>> b13913cb9112d657361d7d7debe8e152d43fb196
 .gradle/
 **/build/
 **/out/
 .cxx/
 .externalNativeBuild/
+<<<<<<< HEAD
 local.properties
 captures/
 *.log
@@ -50,11 +55,65 @@ app/google-services.json
 
 # ========== Editores / temporales ==========
 .vscode/
+=======
+/local.properties
+local.properties
+
+# Capturas/artefactos temporales
+captures/
+*.log
+
+# === Android Studio / IntelliJ ===
+.idea/
+*.iml
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# === Binarios generados ===
+*.apk
+*.aab
+app/release/**
+
+# === Firmas / Keystores (no subir a git) ===
+*.jks
+*.keystore
+key.properties
+
+# === Firebase / Config locales (recomendado no subir) ===
+# Si decides mantenerlos privados, ignora estos; si tu build remoto los necesita, quita estas líneas.
+app/google-services.json
+**/google-services.json
+app/src/**/google-services.json
+app/src/main/assets/firebase_config.json
+
+# === Otros artefactos comunes ===
+*.orig
+*.rej
+
+# === Archivos de entorno/secrets ===
+.env
+.env.*
+*.pem
+*.p12
+*.der
+*.crt
+*.key
+*.cert
+
+# === Perfiles / trazas ===
+*.hprof
+*.trace
+
+# === Temporales de editor/SO ===
+>>>>>>> b13913cb9112d657361d7d7debe8e152d43fb196
 *.tmp
 *.bak
 *~
 *.swp
 *.swo
+<<<<<<< HEAD
 *.orig
 *.rej
 
@@ -64,7 +123,46 @@ app/google-services.json
 fastlane/
 
 # ========== Gradle Wrapper (NO ignorar) ==========
+=======
+
+# === VSCode / JetBrains extra ===
+.vscode/
+.idea/**/shelf/
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/gradle.xml
+.idea/**/assetWizardSettings.xml
+.idea/**/navEditor.xml
+.idea/**/misc.xml
+
+# === Directorios de signing o llaves personalizadas ===
+**/signing/**
+**/.signing/**
+
+# === Salidas de tests / reports locales ===
+**/test-results/
+**/reports/
+**/lint-results*/
+**/lint/tmp/
+
+# === Play/Crashlytics locales ===
+**/crashlytics-build.properties
+**/fabric.properties
+fastlane/
+**/output.json
+
+# Asegúrate de NO ignorar estos (wrapper debe versionarse)
+>>>>>>> b13913cb9112d657361d7d7debe8e152d43fb196
 !gradlew
 !gradlew.bat
 !gradle/wrapper/gradle-wrapper.jar
 !gradle/wrapper/gradle-wrapper.properties
+<<<<<<< HEAD
+=======
+
+# Firebase (Android / iOS)
+**/google-services.json
+**/GoogleService-Info.plist
+# Si usas un config propio en assets:
+**/firebase_config.json
+>>>>>>> b13913cb9112d657361d7d7debe8e152d43fb196
