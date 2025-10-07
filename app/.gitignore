@@ -1,1 +1,70 @@
-/build
+# ========== SO ==========
+.DS_Store
+Thumbs.db
+
+# ========== Android/Gradle ==========
+.gradle/
+**/build/
+**/out/
+.cxx/
+.externalNativeBuild/
+local.properties
+captures/
+*.log
+
+# ========== Android Studio / IntelliJ ==========
+.idea/
+*.iml
+
+# ========== Artefactos de build ==========
+*.apk
+*.aab
+app/release/**
+**/output.json
+**/mapping.txt
+
+# ========== Keystores / firmas ==========
+*.jks
+*.keystore
+key.properties
+**/signing/**
+**/.signing/**
+
+# ========== Firebase / Config locales ==========
+# (mantener privados; si tu CI los necesita, quítalos)
+# Raíz del repo:
+google-services.json
+# Módulo app:
+app/google-services.json
+# Cualquier subcarpeta por si acaso:
+**/google-services.json
+**/GoogleService-Info.plist
+**/firebase_config.json
+
+# ========== Reports / tests / lint ==========
+**/test-results/
+**/reports/
+**/lint-results*
+**/lint/tmp/
+**/jacoco/
+
+# ========== Editores / temporales ==========
+.vscode/
+*.tmp
+*.bak
+*~
+*.swp
+*.swo
+*.orig
+*.rej
+
+# ========== Play/Crashlytics / fastlane ==========
+**/crashlytics-build.properties
+**/fabric.properties
+fastlane/
+
+# ========== Gradle Wrapper (NO ignorar) ==========
+!gradlew
+!gradlew.bat
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
