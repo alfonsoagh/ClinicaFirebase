@@ -1,17 +1,16 @@
 package com.example.clinicasx.ui.lista;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.clinicasx.R;
 
 import java.io.File;
@@ -88,31 +87,18 @@ public class PacienteListAdapter extends BaseAdapter {
         vh.subtitulo.setText(it.area + " • " + it.doctor);
         vh.lineaExtra.setText(it.sexo + " • " + it.edad + " años • " + it.fecha);
 
-        if (!TextUtils.isEmpty(it.imgPath) && new File(it.imgPath).exists()) {
-            Bitmap bm = decodeSampledBitmapFromFile(it.imgPath, 300, 300);
-            vh.img.setImageBitmap(bm != null ? bm : BitmapFactory.decodeResource(ctx.getResources(), R.drawable.ic_person));
-        } else {
+        // Carga robusta de imagen: http(s), content:// o archivo
+        String src = it.imgPath;
+        if (TextUtils.isEmpty(src) || "N/A".equalsIgnoreCase(src)) {
             vh.img.setImageResource(R.drawable.ic_person);
+        } else if (src.startsWith("http")) {
+            Glide.with(ctx).load(src).placeholder(R.drawable.ic_person).error(R.drawable.ic_person).centerCrop().into(vh.img);
+        } else if (src.startsWith("content://")) {
+            Glide.with(ctx).load(Uri.parse(src)).placeholder(R.drawable.ic_person).error(R.drawable.ic_person).centerCrop().into(vh.img);
+        } else {
+            Glide.with(ctx).load(new File(src)).placeholder(R.drawable.ic_person).error(R.drawable.ic_person).centerCrop().into(vh.img);
         }
 
         return convertView;
-    }
-
-    // Utils para miniaturas
-    private static Bitmap decodeSampledBitmapFromFile(String path, int reqWidth, int reqHeight) {
-        BitmapFactory.Options opt = new BitmapFactory.Options();
-        opt.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(path, opt);
-        opt.inSampleSize = calculateInSampleSize(opt, reqWidth, reqHeight);
-        opt.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(path, opt);
-    }
-    private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        int h = options.outHeight, w = options.outWidth, s = 1;
-        if (h > reqHeight || w > reqWidth) {
-            int halfH = h / 2, halfW = w / 2;
-            while ((halfH / s) >= reqHeight && (halfW / s) >= reqWidth) s *= 2;
-        }
-        return s;
     }
 }

@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.example.clinicasx.R;
 import com.example.clinicasx.db.SQLite;
+import com.example.clinicasx.sync.SyncManager;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -419,6 +420,8 @@ public class CreaFragment extends Fragment implements
         );
 
         if (ok) {
+            // Encolar sync inmediata tras CREATE
+            SyncManager.enqueueNow(requireContext());
             toast(getString(R.string.paciente_guardado));
             limpiarCampos();
         } else {

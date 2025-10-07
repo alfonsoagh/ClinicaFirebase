@@ -1,15 +1,100 @@
-*.iml
-.gradle
+# === Android/Gradle ===
+.gradle/
+**/build/
+**/out/
+.cxx/
+.externalNativeBuild/
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
 local.properties
+
+# Capturas/artefactos temporales
+captures/
+*.log
+
+# === Android Studio / IntelliJ ===
+.idea/
+*.iml
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# === Binarios generados ===
+*.apk
+*.aab
+app/release/**
+
+# === Firmas / Keystores (no subir a git) ===
+*.jks
+*.keystore
+key.properties
+
+# === Firebase / Config locales (recomendado no subir) ===
+# Si decides mantenerlos privados, ignora estos; si tu build remoto los necesita, quita estas líneas.
+app/google-services.json
+**/google-services.json
+app/src/**/google-services.json
+app/src/main/assets/firebase_config.json
+
+# === Otros artefactos comunes ===
+*.orig
+*.rej
+
+# === Archivos de entorno/secrets ===
+.env
+.env.*
+*.pem
+*.p12
+*.der
+*.crt
+*.key
+*.cert
+
+# === Perfiles / trazas ===
+*.hprof
+*.trace
+
+# === Temporales de editor/SO ===
+*.tmp
+*.bak
+*~
+*.swp
+*.swo
+
+# === VSCode / JetBrains extra ===
+.vscode/
+.idea/**/shelf/
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/gradle.xml
+.idea/**/assetWizardSettings.xml
+.idea/**/navEditor.xml
+.idea/**/misc.xml
+
+# === Directorios de signing o llaves personalizadas ===
+**/signing/**
+**/.signing/**
+
+# === Salidas de tests / reports locales ===
+**/test-results/
+**/reports/
+**/lint-results*/
+**/lint/tmp/
+
+# === Play/Crashlytics locales ===
+**/crashlytics-build.properties
+**/fabric.properties
+fastlane/
+**/output.json
+
+# Asegúrate de NO ignorar estos (wrapper debe versionarse)
+!gradlew
+!gradlew.bat
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+# Firebase (Android / iOS)
+**/google-services.json
+**/GoogleService-Info.plist
+# Si usas un config propio en assets:
+**/firebase_config.json
